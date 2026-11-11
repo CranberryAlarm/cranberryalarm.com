@@ -32,4 +32,4 @@ All in [site/index.html](site/index.html):
 
 ## Before launch
 
-See issues #1 (domain, the `noindex` tag and the placeholder email address) and #2 (Google Analytics and the privacy notice). Search `site/index.html` for `LAUNCH` and `FILLER` to find everything that is still a stand-in.
+See issues #1 (domain and the `noindex` tag) and #2 (Google Analytics and the privacy notice). Search `site/index.html` for `LAUNCH` and `FILLER` to find everything that is still a stand-in.

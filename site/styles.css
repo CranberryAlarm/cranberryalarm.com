@@ -665,6 +665,16 @@ a:hover {
   transition: scale 0.15s ease-out;
 }
 
+/* A still photo keeps its own shape and the play badge moves off the robot. */
+.robot-video.is-photo img {
+  aspect-ratio: auto;
+}
+
+.robot-video.is-photo::after {
+  inset: auto auto 1rem 1rem;
+  width: 3rem;
+}
+
 .robot-video:hover::after {
   scale: 1.1;
 }
@@ -732,14 +742,11 @@ a:hover {
   margin-bottom: 1.5rem;
 }
 
-.photo-filler {
-  display: grid;
-  place-items: center;
-  aspect-ratio: 3 / 2;
-  background: repeating-linear-gradient(-45deg, var(--slate-deep) 0 14px, #1c222a 14px 28px);
-  border: 1px dashed var(--muted);
-  border-radius: 6px;
-  color: var(--muted);
+.about-photo {
+  width: 100%;
+  border: 1px solid rgb(246 241 234 / 0.16);
+  border-radius: 10px;
+  box-shadow: 0 2.5rem 4rem -1.5rem rgb(0 0 0 / 0.7);
 }
 
 @media (max-width: 47.99rem) {
@@ -803,6 +810,29 @@ a:hover {
 .partners li {
   padding: 1.5rem;
   box-shadow: inset 0 3px 0 var(--leaf);
+}
+
+.partners img {
+  width: auto;
+  height: 5rem;
+  margin-bottom: 1rem;
+  border-radius: 10px;
+}
+
+/* FUN's file is a black square with the logo cut out: flip it to white. */
+.partners img.invert {
+  filter: invert(1);
+}
+
+/* A logo that is already a filled square needs no white frame. */
+.sponsor-logos img.full {
+  padding: 0;
+}
+
+/* Dark logos need a light tile. */
+.partners img.on-light {
+  padding: 0.4rem;
+  background: #fff;
 }
 
 .partners a {
@@ -934,6 +964,17 @@ a:hover {
 
   .js .robot {
     flex-basis: 100%;
+  }
+
+  /* A photo shrinks to fit a short screen, where a thumbnail is cropped. */
+  .js .robot-video.is-photo {
+    justify-self: center;
+    width: fit-content;
+  }
+
+  .js .robot-video.is-photo img {
+    width: auto;
+    max-width: 100%;
   }
 
   /* Short screens: crop the image so it stays inside the pinned slide. */
