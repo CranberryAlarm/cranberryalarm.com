@@ -38,4 +38,4 @@ The view count is shown at the top of each thread.
 
 ## Credits
 
-The Credits under the Impact Numbers were each checked by reading the linked post or repository. Add a Credit only when a team says in public that they built on Cranberry Alarm's work.
+The Credits under the Impact Numbers were each checked by reading the linked post or repository. Add a Credit only when a team says in a public post that they built on Cranberry Alarm's work, or has a public fork of our code.
