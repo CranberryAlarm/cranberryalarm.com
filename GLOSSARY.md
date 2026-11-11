@@ -21,15 +21,31 @@ The newest Season. Before kickoff it has no Robot yet.
 _Avoid_: Current year, upcoming season
 
 **Robot**:
-A machine Cranberry Alarm built during a Season.
+A machine Cranberry Alarm built during a Season, known by its name (for example Mini-Fridge).
 _Avoid_: Bot, build
 
 **Past Robot**:
 A Robot from any Season other than the Featured Season.
 
 **Resource**:
-A public link that belongs to a Robot: its code, its video, or its ChiefDelphi thread.
+A public link that belongs to a Robot: its code, Reveal Video, ChiefDelphi thread, CAD, or Tech Binder.
 _Avoid_: Link, asset
+
+**Reveal Video**:
+The video that first shows a finished Robot.
+_Avoid_: Recap, robot reveal
+
+**Tech Binder**:
+Cranberry Alarm's written build documentation for a Robot.
+_Avoid_: Tech doc, technical binder
+
+**Highlight**:
+A notable result a Robot earned, such as an event win or a ranking.
+_Avoid_: Achievement, award
+
+**Credit**:
+A public post or fork in which another team attributes part of its own robot to Cranberry Alarm.
+_Avoid_: Testimonial, shout-out
 
 **Sponsor**:
 An organization that gives Cranberry Alarm money or product. An organization that is also a Partner is listed only as a Sponsor.
