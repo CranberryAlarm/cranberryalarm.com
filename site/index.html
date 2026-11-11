@@ -14,6 +14,7 @@
 </head>
 <body>
   <a class="skip-link" href="#main">Skip to content</a>
+  <div class="backdrop" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></div>
 
   <header class="site-header">
     <div class="wrap header-inner">
@@ -53,10 +54,14 @@
       </div>
     </section>
 
-    <section class="band band-deep season" id="season">
+    <div class="marquee" aria-hidden="true" data-scrub>
+      <p>Open code <i></i> Open CAD <i></i> Three days <i></i> Every Season <i></i> Open code <i></i> Open CAD <i></i> Three days <i></i> Every Season <i></i> Open code <i></i> Open CAD <i></i> Three days <i></i> Every Season <i></i></p>
+    </div>
+
+    <section class="band band-deep season" id="season" data-scrub>
       <div class="wrap season-inner">
         <h2 class="season-year">2027</h2>
-        <div class="season-copy" data-reveal>
+        <div class="season-copy glass" data-reveal>
           <p class="statement">Kickoff is in January. Watch the build live on FUN.</p>
           <p>The 2027 game is revealed at kickoff, and the three days start right then. This robot's code, CAD and Reveal Video will be posted here when the build is done.</p>
           <div class="actions">
@@ -75,19 +80,19 @@
         </header>
         <!-- Sources and method: docs/impact-numbers.md. Update once per Season. -->
         <dl class="numbers" data-reveal>
-          <div>
+          <div class="glass">
             <dt>video views of our builds</dt>
             <dd data-count="1.1" data-decimals="1" data-suffix="M+">1.1M+</dd>
           </div>
-          <div>
+          <div class="glass">
             <dt>views of our ChiefDelphi build threads</dt>
             <dd data-count="87" data-suffix="K+">87K+</dd>
           </div>
-          <div>
+          <div class="glass">
             <dt>ChiefDelphi topics by other teams that mention us</dt>
             <dd data-count="200" data-suffix="+">200+</dd>
           </div>
-          <div>
+          <div class="glass">
             <dt>Seasons, each with a robot anyone can copy</dt>
             <dd data-count="4">4</dd>
           </div>
@@ -107,15 +112,25 @@
       </div>
     </section>
 
-    <section class="band band-deep" id="robots">
-      <div class="wrap">
-        <header class="section-head" data-reveal>
-          <h2>Robots</h2>
-          <p>Every Season's robot, with everything you need to build your own.</p>
-        </header>
+    <section class="band band-deep robots-section" id="robots">
+      <div class="robots-pin">
+        <div class="wrap robots-head">
+          <header class="section-head">
+            <h2>Robots</h2>
+            <p>Every Season's robot, with everything you need to build your own.</p>
+          </header>
+          <!-- One link per Robot, newest first, matching the ids in the list below. -->
+          <nav class="robot-years" aria-label="Seasons">
+              <a href="#robot-2026">2026</a>
+              <a href="#robot-2025">2025</a>
+              <a href="#robot-2024">2024</a>
+              <a href="#robot-2023">2023</a>
+          </nav>
+        </div>
 
         <ol class="robots" reversed>
-          <li class="robot" data-reveal>
+          <li class="robot" id="robot-2026">
+            <span class="robot-numeral" aria-hidden="true">2026</span>
             <a class="robot-video" href="https://www.youtube.com/watch?v=mV85fHC1xJ4" target="_blank" rel="noopener" aria-label="Watch the Mini-Fridge Reveal Video on YouTube">
               <img src="https://i.ytimg.com/vi/mV85fHC1xJ4/maxresdefault.jpg" alt="" width="1280" height="720" loading="lazy">
             </a>
@@ -131,7 +146,8 @@
             </div>
           </li>
 
-          <li class="robot" data-reveal>
+          <li class="robot" id="robot-2025">
+            <span class="robot-numeral" aria-hidden="true">2025</span>
             <a class="robot-video" href="https://www.youtube.com/watch?v=ObX3kXViraY" target="_blank" rel="noopener" aria-label="Watch the Bottom Feeder Reveal Video on YouTube">
               <img src="https://i.ytimg.com/vi/ObX3kXViraY/maxresdefault.jpg" alt="" width="1280" height="720" loading="lazy">
             </a>
@@ -148,7 +164,8 @@
             </div>
           </li>
 
-          <li class="robot" data-reveal>
+          <li class="robot" id="robot-2024">
+            <span class="robot-numeral" aria-hidden="true">2024</span>
             <a class="robot-video" href="https://www.youtube.com/watch?v=6p0LO3NxYZ4" target="_blank" rel="noopener" aria-label="Watch the Flipside Reveal Video on YouTube">
               <img src="https://i.ytimg.com/vi/6p0LO3NxYZ4/maxresdefault.jpg" alt="" width="1280" height="720" loading="lazy">
             </a>
@@ -166,7 +183,8 @@
             </div>
           </li>
 
-          <li class="robot" data-reveal>
+          <li class="robot" id="robot-2023">
+            <span class="robot-numeral" aria-hidden="true">2023</span>
             <a class="robot-video" href="https://www.youtube.com/watch?v=Lp56Iqhxctg" target="_blank" rel="noopener" aria-label="Watch the Rattlesnake Reveal Video on YouTube">
               <img src="https://i.ytimg.com/vi/Lp56Iqhxctg/maxresdefault.jpg" alt="" width="1280" height="720" loading="lazy">
             </a>
@@ -208,10 +226,10 @@
           <h2>Sponsors</h2>
           <p>The companies whose parts make a three-day build possible.</p>
         </header>
-        <!-- FILLER: names stand in for logo files until the Sponsors supply them. -->
-        <ul class="wordmarks" data-reveal>
-          <li><a href="https://www.thethriftybot.com/" target="_blank" rel="noopener">The Thrifty Bot</a></li>
-          <li><a href="https://www.andymark.com/" target="_blank" rel="noopener">AndyMark</a></li>
+        <!-- FILLER: logo marks taken from our ChiefDelphi threads; swap for files the Sponsors supply. -->
+        <ul class="sponsor-logos" data-reveal>
+          <li><a class="glass" href="https://www.thethriftybot.com/" target="_blank" rel="noopener"><img src="assets/sponsors/the-thrifty-bot.jpg" alt="" width="288" height="288" loading="lazy"><span>The Thrifty Bot</span></a></li>
+          <li><a class="glass" href="https://www.andymark.com/" target="_blank" rel="noopener"><img src="assets/sponsors/andymark.png" alt="" width="1560" height="1560" loading="lazy"><span>AndyMark</span></a></li>
         </ul>
         <p class="sponsor-ask" data-reveal>
           Want your parts on next year's robot?
@@ -229,15 +247,15 @@
         </header>
         <!-- FILLER: names stand in for logo files until the Partners supply them. -->
         <ul class="partners" data-reveal>
-          <li>
+          <li class="glass">
             <a href="https://www.youtube.com/@funroboticsnetwork" target="_blank" rel="noopener">First Updates Now (FUN)</a>
             <p>Content partner. Streams and films every build since 2024.</p>
           </li>
-          <li>
+          <li class="glass">
             <a href="https://www.redalert1741.org/" target="_blank" rel="noopener">1741 Red Alert Robotics</a>
             <p>Host team.</p>
           </li>
-          <li>
+          <li class="glass">
             <a href="https://www.sigmacats.org/" target="_blank" rel="noopener">108 SigmaC@T Robotics</a>
             <p>Supporting team.</p>
           </li>

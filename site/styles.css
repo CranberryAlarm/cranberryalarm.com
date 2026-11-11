@@ -220,7 +220,69 @@ a:hover {
 }
 
 .band-deep {
-  background: var(--slate-deep);
+  background: rgb(23 28 35 / 0.66);
+}
+
+/* Backdrop: soft colour fields behind everything. With motion on they drift
+   at different speeds as the page scrolls. */
+.backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.backdrop i {
+  position: absolute;
+  width: 70vmax;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  background: radial-gradient(closest-side, var(--glow), transparent);
+  translate: 0 calc(var(--sy, 0) * var(--speed) * -1px);
+}
+
+.backdrop i:nth-child(1) { --glow: rgb(228 29 44 / 0.34); --speed: 0.08; right: -22vmax; top: -24vmax; }
+.backdrop i:nth-child(2) { --glow: rgb(95 174 12 / 0.2); --speed: 0.16; left: -30vmax; top: 55vh; }
+.backdrop i:nth-child(3) { --glow: rgb(255 191 148 / 0.16); --speed: 0.3; right: -25vmax; top: 190vh; }
+.backdrop i:nth-child(4) { --glow: rgb(228 29 44 / 0.3); --speed: 0.42; left: -20vmax; top: 420vh; }
+.backdrop i:nth-child(5) { --glow: rgb(95 174 12 / 0.2); --speed: 0.5; right: -25vmax; top: 640vh; }
+
+.glass {
+  background: rgb(246 241 234 / 0.045);
+  border: 1px solid rgb(246 241 234 / 0.14);
+  border-radius: 14px;
+  -webkit-backdrop-filter: blur(16px) saturate(1.3);
+  backdrop-filter: blur(16px) saturate(1.3);
+}
+
+/* Marquee: one strip of outlined type that slides as the page scrolls. */
+.marquee {
+  overflow-x: clip;
+  padding-block: clamp(1rem, 3vw, 2rem);
+  border-block: 1px solid var(--line);
+}
+
+.marquee p {
+  width: max-content;
+  color: transparent;
+  font-family: var(--display);
+  font-size: clamp(3rem, 9vw, 7rem);
+  font-weight: 900;
+  line-height: 1;
+  white-space: nowrap;
+  -webkit-text-stroke: 1.5px rgb(246 241 234 / 0.55);
+  translate: calc(var(--p, 0.5) * -30%) 0;
+}
+
+.marquee i {
+  display: inline-block;
+  width: 0.32em;
+  aspect-ratio: 1;
+  margin-inline: 0.25em;
+  background: var(--cranberry);
+  border-radius: 50%;
+  vertical-align: 0.18em;
 }
 
 .section-head {
@@ -329,13 +391,17 @@ a:hover {
   position: relative;
   justify-self: center;
   width: min(100%, 24rem);
-  rotate: -7deg;
+  rotate: calc(-7deg + var(--sy, 0) * 0.03deg);
+  translate: 0 calc(var(--sy, 0) * -0.3px);
 }
 
+/* The sticker leans toward the pointer. */
 .hero-logo img {
   --edge: 5px;
   position: relative;
   width: 100%;
+  transform: perspective(700px) rotateX(calc(var(--tilt-y, 0) * -14deg)) rotateY(calc(var(--tilt-x, 0) * 14deg));
+  transition: transform 0.2s ease-out;
 }
 
 /* The beacon on the logo flashes twice when the page opens. */
@@ -376,7 +442,16 @@ a:hover {
   gap: clamp(1.5rem, 6vw, 5rem);
 }
 
+.season {
+  overflow-x: clip;
+}
+
+.season-copy {
+  padding: clamp(1.5rem, 3vw, 2.5rem);
+}
+
 .season-year {
+  translate: calc((0.5 - var(--p, 0.5)) * 36vw) 0;
   color: var(--cranberry);
   font-family: var(--display);
   font-size: clamp(6.5rem, 22vw, 17rem);
@@ -403,8 +478,8 @@ a:hover {
   display: flex;
   flex-direction: column-reverse;
   justify-content: flex-end;
-  padding-top: 1rem;
-  border-top: 3px solid var(--cranberry);
+  padding: 1.5rem;
+  box-shadow: inset 0 3px 0 var(--cranberry);
 }
 
 .numbers dd {
@@ -427,7 +502,7 @@ a:hover {
   font-size: 0.9375rem;
 }
 
-@media (max-width: 59.99rem) {
+@media (max-width: 71.99rem) {
   .numbers {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
@@ -461,42 +536,113 @@ a:hover {
   border-top: 1px solid var(--line);
 }
 
-/* Robots: the Seasons hang off a cranberry vine, newest first. */
+/* Robots: a sideways timeline, newest first. By default it is a strip you
+   swipe or scroll sideways. On larger screens with motion on, the section
+   pins and scrolling down moves the strip across (see the end of this file). */
+
+.robots-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: end;
+  justify-content: space-between;
+  gap: 1.5rem 3rem;
+  margin-bottom: clamp(1rem, 3vw, 2rem);
+}
+
+.robots-head .section-head {
+  margin-bottom: 0;
+}
+
+/* The cranberry vine: one berry per Season, the current one lit. */
+.robot-years {
+  display: flex;
+  gap: clamp(1.5rem, 4vw, 3rem);
+  border-top: 3px solid var(--leaf);
+}
+
+.robot-years a {
+  position: relative;
+  padding-top: 0.9rem;
+  color: var(--muted);
+  font-family: var(--display);
+  font-size: 1.5rem;
+  font-weight: 800;
+  line-height: 1;
+  text-decoration: none;
+}
+
+.robot-years a::before {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: 0;
+  width: 0.9rem;
+  aspect-ratio: 1;
+  background: var(--slate-deep);
+  border: 3px solid var(--cranberry);
+  border-radius: 50%;
+  translate: -50% calc(-50% - 1.5px);
+  transition: scale 0.2s ease-out, background-color 0.2s ease-out;
+}
+
+.robot-years a:hover,
+.robot-years a[aria-current] {
+  color: var(--paper);
+}
+
+.robot-years a[aria-current]::before {
+  background: var(--cranberry);
+  scale: 1.45;
+}
 
 .robots {
-  position: relative;
-  display: grid;
-  gap: clamp(3rem, 7vw, 5.5rem);
-  padding-left: clamp(1.75rem, 4vw, 3rem);
-  border-left: 3px solid var(--leaf);
+  display: flex;
+  overflow-x: auto;
+  overscroll-behavior-x: contain;
+  scroll-snap-type: x mandatory;
+  scrollbar-width: thin;
+  scrollbar-color: var(--line) transparent;
 }
 
 .robot {
   position: relative;
+  flex: 0 0 92%;
   display: grid;
   grid-template-columns: minmax(0, 6fr) minmax(0, 5fr);
   align-items: center;
-  gap: clamp(1.5rem, 4vw, 3.5rem);
+  gap: clamp(1.25rem, 4vw, 3.5rem);
+  padding: clamp(1.5rem, 4vw, 3rem) max(var(--gutter), calc((100vw - 74rem) / 2));
+  overflow: clip;
+  scroll-snap-align: start;
 }
 
-.robot::before {
-  content: "";
+/* --d is how many slides this Robot is from the centre of the screen. */
+.robot-numeral {
   position: absolute;
-  left: calc(-1 * clamp(1.75rem, 4vw, 3rem) - 0.7rem);
-  top: 0.4rem;
-  width: 1.4rem;
-  aspect-ratio: 1;
-  background: var(--cranberry);
-  border: 3px solid var(--slate-deep);
-  border-radius: 50%;
+  right: 0;
+  top: 50%;
+  color: transparent;
+  font-family: var(--display);
+  font-size: clamp(9rem, 30vw, 27rem);
+  font-weight: 900;
+  line-height: 0.8;
+  letter-spacing: -0.02em;
+  -webkit-text-stroke: 2px rgb(228 29 44 / 0.4);
+  translate: calc(var(--d, 0) * 34vw) -50%;
+  pointer-events: none;
+  user-select: none;
 }
 
 .robot-video {
   position: relative;
   display: block;
   overflow: hidden;
-  border-radius: 6px;
+  border: 1px solid rgb(246 241 234 / 0.16);
+  border-radius: 10px;
   background: var(--slate);
+  box-shadow: 0 2.5rem 4rem -1.5rem rgb(0 0 0 / 0.7);
+  rotate: calc(-2deg + var(--d, 0) * 7deg);
+  translate: calc(var(--d, 0) * -7vw) 0;
 }
 
 .robot-video img {
@@ -523,9 +669,13 @@ a:hover {
   scale: 1.1;
 }
 
+.robot-body {
+  position: relative;
+}
+
 .robot h3 {
   font-family: var(--display);
-  font-size: clamp(2.5rem, 5.5vw, 4rem);
+  font-size: clamp(2.75rem, 6vw, 5rem);
   font-weight: 900;
   line-height: 0.95;
 }
@@ -533,7 +683,7 @@ a:hover {
 .robot-year {
   display: block;
   color: var(--peach);
-  font-size: 0.5em;
+  font-size: 0.4em;
   font-weight: 700;
   line-height: 1.3;
 }
@@ -560,6 +710,12 @@ a:hover {
 @media (max-width: 47.99rem) {
   .robot {
     grid-template-columns: 1fr;
+    align-content: start;
+  }
+
+  .robot-numeral {
+    top: 0.5rem;
+    translate: calc(var(--d, 0) * 34vw) 0;
   }
 }
 
@@ -594,23 +750,37 @@ a:hover {
 
 /* Sponsors and Partners */
 
-.wordmarks {
+.sponsor-logos {
   display: flex;
   flex-wrap: wrap;
-  gap: 1rem clamp(2rem, 8vw, 6rem);
+  gap: clamp(1rem, 3vw, 2rem);
 }
 
-.wordmarks a {
+.sponsor-logos a {
+  display: flex;
+  align-items: center;
+  gap: clamp(1rem, 3vw, 2rem);
+  padding: clamp(1rem, 2.5vw, 1.75rem);
+  padding-right: clamp(1.5rem, 4vw, 3rem);
   color: var(--paper);
   font-family: var(--display);
-  font-size: clamp(2.5rem, 7vw, 5rem);
+  font-size: clamp(2rem, 5vw, 3.75rem);
   font-weight: 900;
-  line-height: 1.05;
+  line-height: 1;
   text-decoration: none;
+  transition: border-color 0.2s ease-out, translate 0.2s ease-out;
 }
 
-.wordmarks a:hover {
-  color: var(--cranberry);
+.sponsor-logos a:hover {
+  border-color: var(--cranberry);
+  translate: 0 -4px;
+}
+
+.sponsor-logos img {
+  width: clamp(4.5rem, 10vw, 7rem);
+  padding: 0.5rem;
+  background: #fff;
+  border-radius: 10px;
 }
 
 .sponsor-ask {
@@ -631,8 +801,8 @@ a:hover {
 }
 
 .partners li {
-  padding-top: 1rem;
-  border-top: 3px solid var(--leaf);
+  padding: 1.5rem;
+  box-shadow: inset 0 3px 0 var(--leaf);
 }
 
 .partners a {
@@ -663,7 +833,7 @@ a:hover {
 
 .site-footer {
   padding-block: 3rem;
-  background: var(--slate-deep);
+  background: rgb(23 28 35 / 0.8);
   border-top: 1px solid var(--line);
 }
 
@@ -733,6 +903,37 @@ a:hover {
   .js [data-reveal].is-visible {
     opacity: 1;
     translate: 0 0;
+  }
+}
+
+/* Pinned Robots timeline: scrolling down moves the strip sideways. */
+@media (prefers-reduced-motion: no-preference) and (min-width: 48rem) and (min-height: 37.5rem) {
+  .js .robots-section {
+    height: calc(var(--slides, 4) * 100svh);
+    padding-block: 0;
+  }
+
+  .js .robots-pin {
+    position: sticky;
+    top: var(--header-height);
+    display: flex;
+    flex-direction: column;
+    height: calc(100svh - var(--header-height));
+    padding-block: clamp(1.25rem, 4vh, 3rem);
+    overflow: clip;
+  }
+
+  .js .robots {
+    flex: 1;
+    min-height: 0;
+    overflow: visible;
+    scroll-snap-type: none;
+    translate: calc(var(--p, 0) * (var(--slides, 4) - 1) * -100%) 0;
+    will-change: translate;
+  }
+
+  .js .robot {
+    flex-basis: 100%;
   }
 }
 
