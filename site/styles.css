@@ -935,6 +935,11 @@ a:hover {
   .js .robot {
     flex-basis: 100%;
   }
+
+  /* Short screens: crop the image so it stays inside the pinned slide. */
+  .js .robot-video img {
+    max-height: calc(100svh - 19rem);
+  }
 }
 
 @keyframes rise {
